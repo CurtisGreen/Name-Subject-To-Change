@@ -49,17 +49,27 @@ export default function Quiz() {
         {history.map((entry) => (
           <div
             key={entry.answer.kanji}
-            style={{ fontSize: "2rem", margin: "5px", padding: "5px" }}
+            style={{
+              fontSize: "2rem",
+              margin: "5px",
+              padding: "5px",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+            }}
           >
-            {entry.answer.kanji} vs{" "}
-            <span
+            {/* TODO: Show all meanings */}
+            <div>
+              {entry.answer.kanji}: {entry.answer.meanings[0]}
+            </div>
+            <div style={{ justifySelf: "center" }}>vs</div>
+            <div
               style={{
                 color:
                   entry.answer.kanji == entry.curKanji.kanji ? "green" : "red",
               }}
             >
-              {entry.curKanji.kanji}
-            </span>
+              {entry.curKanji.kanji}: {entry.curKanji.meanings[0]}
+            </div>
           </div>
         ))}
       </div>
