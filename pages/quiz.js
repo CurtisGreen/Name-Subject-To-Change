@@ -16,9 +16,17 @@ export default function Quiz() {
 
   // Setup question arr
   const answers = [curKanji];
+  // todo: shuffle answer choices so correct answer isn't always first
   const numAnswers = 4;
   for (let i = 0; i < numAnswers; i++) {
-    answers.push(generateRandomKanji());
+    let foundKanji = true;
+    while (foundKanji) {
+      const randomKanji = generateRandomKanji();
+      foundKanji = answers.find(answer => answer.kanji == randomKanji.kanji);
+      if (!foundKanji) {
+        answers.push(randomKanji);
+      }
+    }
   }
 
   const selectAnswer = (answer) => {
