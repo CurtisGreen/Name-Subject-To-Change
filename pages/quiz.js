@@ -4,6 +4,8 @@ import styles from "../styles/Home.module.css";
 import { useState } from "react";
 import Link from "next/link";
 import { generateRandomKanji } from "../lib/GenerateKanji.js";
+import { generateAnswerChoices } from "../lib/GenerateAnswerChoices";
+import { getRandInList } from "../lib/RandomUtilities";
 
 export default function Quiz() {
   // Keep track of answers
@@ -15,33 +17,17 @@ export default function Quiz() {
   const curKanji = generateRandomKanji();
 
   // Setup question arr
-  const answers = [curKanji];
-  // todo: shuffle answer choices so correct answer isn't always first
-  const numAnswers = 4;
-  for (let i = 0; i < numAnswers; i++) {
-    let foundKanji = true;
-    while (foundKanji) {
-      const randomKanji = generateRandomKanji();
-      foundKanji = answers.find(answer => answer.kanji == randomKanji.kanji);
-      if (!foundKanji) {
-        answers.push(randomKanji);
-      }
-    }
-  }
+  const answers = generateAnswerChoices(curKanji, 4);
 
   const selectAnswer = (answer) => {
     setHistory([...history, { answer, curKanji }]);
-
-    if (history.length + 1 >= numQuestions) {
-      setIsResultsShown(true);
-    } else {
-      setIsResultsShown(false);
-    }
+    setIsResultsShown(history.length + 1 >= numQuestions);
   };
 
   const Questions = () => (
     <div>
-      <h2>{curKanji.meanings[0]}</h2>
+      {/* Show one of the meanings */}
+      <h2>{getRandInList(curKanji.meanings)}</h2>
       <div>
         {answers.map((answer) => (
           <button
@@ -65,7 +51,7 @@ export default function Quiz() {
             key={entry.answer.kanji}
             style={{ fontSize: "2rem", margin: "5px", padding: "5px" }}
           >
-            <span>{entry.answer.kanji}</span> vs{" "}
+            {entry.answer.kanji} vs{" "}
             <span
               style={{
                 color:
