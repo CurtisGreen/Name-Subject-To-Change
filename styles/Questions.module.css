@@ -1,0 +1,35 @@
+.questions {
+  animation: slidein 1.5s ease;
+  position: relative;
+}
+
+.questionsOut {
+  animation: slideout 1.5s ease 0s forwards;
+  overflow: hidden;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0.4;
+    right: 30vw;
+  }
+  to {
+    opacity: 1;
+    right: 0;
+  }
+}
+
+@keyframes slideout {
+  from {
+    position: absolute;
+    padding-left: 0;
+    opacity: 1;
+  }
+  to {
+    position: absolute;
+    padding-left: 40vw;
+    opacity: 0;
+    margin: 0;
+    visibility: hidden;
+  }
+}

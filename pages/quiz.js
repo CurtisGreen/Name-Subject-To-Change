@@ -1,17 +1,21 @@
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import QuestionStyles from "../styles/Questions.module.css";
 import { useState } from "react";
 import Link from "next/link";
 import { generateRandomKanji } from "../lib/GenerateKanji.js";
 import { generateAnswerChoices } from "../lib/GenerateAnswerChoices";
 import { getRandInList } from "../lib/RandomUtilities";
+import QuizButton from "../components/QuizButton";
 
 export default function Quiz() {
   // Keep track of answers
   const numQuestions = 5;
   const [history, setHistory] = useState([]);
   const [isResultsShown, setIsResultsShown] = useState(false);
+  const [questionStyle, setQuestionStyle] = useState(
+    QuestionStyles.questionsOut
+  );
 
   // Get current kanji
   const curKanji = generateRandomKanji();
@@ -22,22 +26,33 @@ export default function Quiz() {
   const selectAnswer = (answer) => {
     setHistory([...history, { answer, curKanji }]);
     setIsResultsShown(history.length + 1 >= numQuestions);
+    // setQuestionStyle(QuestionStyles.questionOut);
+    // setTimeout(() => setQuestionStyle(QuestionStyles.questions), 500);
   };
 
   const Questions = () => (
-    <div>
-      {/* Show one of the meanings */}
-      <h2>{getRandInList(curKanji.meanings)}</h2>
-      <div>
-        {answers.map((answer) => (
-          <button
-            key={answer.kanji}
-            onClick={() => selectAnswer(answer)}
-            style={{ fontSize: "2rem", margin: "5px", padding: "5px" }}
-          >
-            {answer.kanji}
-          </button>
-        ))}
+    <div style={{ display: "flex" }}>
+      <div className={QuestionStyles.questions}>
+        {/* Show one of the meanings */}
+        <h2>{getRandInList(curKanji.meanings)}</h2>
+        <div>
+          {answers.map((answer) => (
+            <QuizButton key={answer.kanji} onClick={() => selectAnswer(answer)}>
+              {answer.kanji}
+            </QuizButton>
+          ))}
+        </div>
+      </div>
+      <div className={QuestionStyles.questionsOut}>
+        {/* Show one of the meanings */}
+        <h2>{getRandInList(curKanji.meanings)}</h2>
+        <div>
+          {answers.map((answer) => (
+            <QuizButton key={answer.kanji} onClick={() => selectAnswer(answer)}>
+              {answer.kanji}
+            </QuizButton>
+          ))}
+        </div>
       </div>
     </div>
   );
