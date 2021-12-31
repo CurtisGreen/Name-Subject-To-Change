@@ -4,13 +4,13 @@ import { useState } from "react";
 import NavBar from "../components/NavBar";
 import RandomKanjiButton from "../components/RandomKanjiButton";
 import Main from "../components/Main";
+import getTodaysKanji from "../lib/GetTodaysKanji";
 
 export default function Home() {
   const kanjiArr = Object.entries(kanji);
   const numKanji = kanjiArr.length;
-  const getKanjiIndex = () => Math.floor(Math.random() * numKanji);
-  const [index, setIndex] = useState(getKanjiIndex());
-  console.log(kanjiArr[index]["0"]);
+  const getRandomKanjiIndex = () => Math.floor(Math.random() * numKanji);
+  const [index, setIndex] = useState(getTodaysKanji(numKanji));
 
   return (
     <div>
@@ -23,7 +23,7 @@ export default function Home() {
       <NavBar />
       <Main>
         <p style={{ fontSize: "5rem" }}>{kanjiArr[index]["0"]}</p>
-        <RandomKanjiButton onClick={() => setIndex(getKanjiIndex())} />
+        <RandomKanjiButton onClick={() => setIndex(getRandomKanjiIndex())} />
       </Main>
     </div>
   );
