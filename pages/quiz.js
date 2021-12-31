@@ -7,6 +7,7 @@ import { generateAnswerChoices } from "../lib/GenerateAnswerChoices";
 import { getRandInList } from "../lib/RandomUtilities";
 import QuizButton from "../components/QuizButton";
 import NavBar from "../components/NavBar";
+import Main from "../components/Main";
 
 export default function Quiz() {
   // Keep track of answers
@@ -100,12 +101,11 @@ export default function Quiz() {
       </Head>
 
       <NavBar />
-      <main>
+      <Main>
         <h1>Quiz</h1>
-        <Link href={"/"}>Home</Link>
 
         {isResultsShown && history.length > 0 ? <Results /> : <Questions />}
-      </main>
+      </Main>
     </div>
   );
 }
