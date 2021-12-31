@@ -10,7 +10,7 @@ export default function NavBar({}) {
         padding: "10px",
       }}
     >
-      <NavButton url="/">Home</NavButton>
+      <NavButton url="/">N.S.T.C</NavButton>
       <NavButton url="/quiz">Quiz</NavButton>
     </div>
   );

@@ -1,5 +1,4 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import QuestionStyles from "../styles/Questions.module.css";
 import { useState } from "react";
 import Link from "next/link";
@@ -101,8 +100,8 @@ export default function Quiz() {
       </Head>
 
       <NavBar />
-      <main className={styles.main}>
-        <h1 className={styles.title}>Quiz</h1>
+      <main>
+        <h1>Quiz</h1>
         <Link href={"/"}>Home</Link>
 
         {isResultsShown && history.length > 0 ? <Results /> : <Questions />}

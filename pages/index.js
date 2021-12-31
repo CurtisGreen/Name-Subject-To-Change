@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import kanji from "../data/kanji-jouyou.json";
 import { useState } from "react";
 import NavBar from "../components/NavBar";
+import RandomKanjiButton from "../components/RandomKanjiButton";
+import Main from "../components/Main";
 
 export default function Home() {
   const kanjiArr = Object.entries(kanji);
@@ -20,34 +20,16 @@ export default function Home() {
       </Head>
 
       <NavBar />
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <code>name-subject-to-change</code>
-        </h1>
-        <button
+      <Main>
+        <p style={{ fontSize: "5rem" }}>{kanjiArr[index]["0"]}</p>
+        <RandomKanjiButton
           onClick={() => {
             const newIndex = Math.round(Math.random() * numKanji);
             console.log(index, newIndex);
             setIndex(newIndex);
           }}
-        >
-          Random Kanji
-        </button>
-        <p style={{ fontSize: "5rem" }}>{kanjiArr[index]["0"]}</p>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+        />
+      </Main>
     </div>
   );
 }
