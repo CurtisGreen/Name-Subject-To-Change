@@ -8,7 +8,8 @@ import Main from "../components/Main";
 export default function Home() {
   const kanjiArr = Object.entries(kanji);
   const numKanji = kanjiArr.length;
-  const [index, setIndex] = useState(0);
+  const getKanjiIndex = () => Math.round(Math.random() * numKanji);
+  const [index, setIndex] = useState(getKanjiIndex());
   console.log(kanjiArr[index]["0"]);
 
   return (
@@ -22,13 +23,7 @@ export default function Home() {
       <NavBar />
       <Main>
         <p style={{ fontSize: "5rem" }}>{kanjiArr[index]["0"]}</p>
-        <RandomKanjiButton
-          onClick={() => {
-            const newIndex = Math.round(Math.random() * numKanji);
-            console.log(index, newIndex);
-            setIndex(newIndex);
-          }}
-        />
+        <RandomKanjiButton onClick={() => setIndex(getKanjiIndex())} />
       </Main>
     </div>
   );

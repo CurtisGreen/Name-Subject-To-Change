@@ -4,10 +4,10 @@ export default function RandomKanjiButton({ onClick }) {
       onClick={onClick}
       style={{
         fontSize: "30px",
-        backgroundColor: "#e1e1e1",
+        backgroundColor: "var(--theme-color)",
         border: "none",
         padding: "10px",
-        borderRadius: "5px",
+        borderRadius: "var(--border-radius)",
         cursor: "pointer",
       }}
     >
