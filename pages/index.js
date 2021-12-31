@@ -8,7 +8,7 @@ import Main from "../components/Main";
 export default function Home() {
   const kanjiArr = Object.entries(kanji);
   const numKanji = kanjiArr.length;
-  const getKanjiIndex = () => Math.round(Math.random() * numKanji);
+  const getKanjiIndex = () => Math.floor(Math.random() * numKanji);
   const [index, setIndex] = useState(getKanjiIndex());
   console.log(kanjiArr[index]["0"]);
 
